@@ -28,10 +28,12 @@ async function getOrderById(req, res) {
 async function createOrder(req, res) {
   const { cliente, contacto, ordenTrabajo, fechaOrdenTrabajo, fechaEntregaOrdenTrabajo, formaPago, valorTotal, observaciones, estado, processes } = req.body;
   try {
+    console.log(req.body); // Muestra los datos recibidos en el cuerpo de la solicitud
     const order = new Order({ cliente, contacto, ordenTrabajo, fechaOrdenTrabajo, fechaEntregaOrdenTrabajo, formaPago, valorTotal, observaciones, estado, processes });
     await order.save();
     res.status(201).json(order);
   } catch (error) {
+    console.error(error); // Muestra cualquier error que ocurra
     res.status(400).json({ error: 'Error al crear la orden.' });
   }
 }
